@@ -1,11 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage,  PageNotAnInteger
 from django.views.generic import ListView
-from .forms import EmailPostForm, CommentForm, SearchForm
 from django.views.decorators.http import require_POST
-from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.contrib.postgres.search import(
@@ -13,6 +10,10 @@ from django.contrib.postgres.search import(
     SearchQuery,
     SearchRank,
 )
+from taggit.models import Tag
+
+from .models import Post
+from .forms import EmailPostForm, CommentForm, SearchForm
 # from django.contrib.postgres.
 
 

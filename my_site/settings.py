@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
-# from decouple import config
+from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-esgyg9h0dut!3$t%g0#b#-@s@b&1&-h$83d0#^1sl1@i6ldx3q"
+SECRET_KEY = config("SECRET_KEY", default="django-insecure-esgyg9h0dut!3$t%g0#b#-@s@b&1&-h$83d0#^1sl1@i6ldx3q")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv())
 
 
 # Application definition
@@ -88,11 +89,11 @@ WSGI_APPLICATION = "my_site.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogdb',
-        'USER': 'bloguser',
-        'PASSWORD': 'blogpass',
-        'HOST': 'localhost',
-        'PORT': '5550',
+        'NAME': os.environ.get('DB_NAME', 'blog'),  # 改为 blog
+        'USER': os.environ.get('DB_USER', 'blog'),  # 改为 blog
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'StrongPass123!'),
+        'HOST': os.environ.get('DB_HOST', 'db' if os.environ.get('RUNNING_IN_DOCKER') else 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
