@@ -19,3 +19,22 @@ __pycache__/
 
 # 静态文件收集
 staticfiles/
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 数据库文件
+*.db
+*.sqlite3
+
+# 敏感数据导出 (如果必须用，建议先加密)
+*data.json
+*secret*.json
+
+# 用户列表等
+users.txt
+members.csv
+
+mysite_data.json
