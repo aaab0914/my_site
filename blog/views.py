@@ -74,7 +74,7 @@ def post_list(request, tag_slug=None):
     return render(
         request,
         'blog/post/list.html',
-        {'posts': posts}
+        {'posts': posts, 'tag': tag if tag_slug else None}
     )
 
 def post_detail(request, year, month, day, post_slug):

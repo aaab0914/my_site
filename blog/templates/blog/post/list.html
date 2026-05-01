@@ -27,5 +27,5 @@
         </p>
         {{ post.body|truncatewords_html:30|markdown}}
     {% endfor %}
-    {% include "blog/pagination.html" with page=page_posts %}
+    {% include "blog/pagination.html" with page=posts %}
 {% endblock %}
