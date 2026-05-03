@@ -1,4 +1,4 @@
-<h2>Add a new comment</h2>
+<h2>Add a New Comment</h2>
 <form action="{% url "blog:post_comment" post.id %}" method="post">
     <div class="left">
         {{ form.name.as_field_group }}
@@ -9,5 +9,5 @@
     {{ form.body.as_field_group }}
 {#    {{ form.as_p }}#}
     {% csrf_token %}
-    <p><input type="submit" value="Add comment"></p>
+    <p><input type="submit" value="Add Comment"></p>
 </form>

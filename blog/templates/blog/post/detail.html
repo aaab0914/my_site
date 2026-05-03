@@ -12,7 +12,7 @@
 
     {% with comments.count as total_comments %}
         <h2>
-            {{ total_comments }} comment{{ total_comments|pluralize }}
+            {{ total_comments }} Comment{{ total_comments|pluralize }}
         </h2>
     {% endwith %}
 
@@ -25,16 +25,16 @@
             {{ comment.body|linebreaks }}
         </div>
     {% empty %}
-        <p>There are no comments.</p>
+        <p>There are no Comments.</p>
     {% endfor %}
 
-    <h2>Similar posts</h2>
+    <h2>Similar Posts</h2>
     {% for post in similar_posts %}
         <p>
             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
         </p>
     {% empty %}
-        <p>There are no similar posts yet.</p>
+        <p>There are no Similar Posts yet.</p>
     {% endfor %}
 
     {% include "blog/post/includes/comment_form.html" %}

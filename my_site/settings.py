@@ -44,9 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
-    'blog.apps.BlogConfig',
 
-    # 'taggot',
+    'blog.apps.BlogConfig',
 
     # third-party
     'taggit',
@@ -89,8 +88,8 @@ WSGI_APPLICATION = "my_site.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'blog'),  # 改为 blog
-        'USER': os.environ.get('DB_USER', 'blog'),  # 改为 blog
+        'NAME': os.environ.get('DB_NAME', 'blog'),
+        'USER': os.environ.get('DB_USER', 'blog'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'StrongPass123!'),
         'HOST': os.environ.get('DB_HOST', 'db' if os.environ.get('RUNNING_IN_DOCKER') else 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
