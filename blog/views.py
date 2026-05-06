@@ -19,14 +19,6 @@ from django.views.decorators.http import require_POST
 from django.db.models import Count
 # Count: Aggregation function used to count the number of related objects
 
-from django.contrib.postgres.search import TrigramSimilarity
-# TrigramSimilarity: PostgreSQL trigram similarity function for fuzzy text matching
-
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-# SearchVector: Represents a searchable document composed of fields
-# SearchQuery: Represents a search query expression
-# SearchRank: Calculates a rank for search results based on relevance
-
 from taggit.models import Tag
 # Tag: Model class representing tags used for tagging posts
 
@@ -38,6 +30,18 @@ from .forms import EmailPostForm, CommentForm, SearchForm
 # CommentForm: Form for adding a comment to a post
 # SearchForm: Form for searching posts by keyword
 
+from django.db.models import Count
+# Count: Aggregation function used to count the number of related objects
+
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
+# SearchVector: Represents a searchable document composed of fields (e.g., title + body)
+# SearchQuery: Represents a search query expression (e.g., 'django')
+# SearchRank: Calculates a rank for search results based on relevance
+# TrigramSimilarity: PostgreSQL trigram similarity function for fuzzy text matching
+
+from django.db.models import Q
+# Q: Used to build complex queries with OR, AND, and NOT conditions
+
 
 # Class-based view for listing posts (alternative implementation)
 class PostListView(ListView):
@@ -48,7 +52,6 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 10
     template_name = 'blog/post/list.html'
-
 
 # View function for sharing a post via email
 def post_share(request, post_id):
@@ -120,11 +123,28 @@ def post_detail(request, year, month, day, post_slug):
     # Form for user to comment
     form = CommentForm()
 
-    # List of similar posts based on shared tags
+    # Get IDs of tags associated with the current post
     post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = Post.published.filter(
+
+    # Step 1: Find posts that share at least one tag
+    tag_based_posts = Post.published.filter(
         tags__in=post_tags_ids
     ).exclude(id=post.id)
+
+    # Step 2: Find posts with similar titles (using trigram similarity)
+    # Only do this if we have fewer than 4 tag-based posts
+    title_based_posts = Post.published.none()
+    if tag_based_posts.count() < 4:
+        title_based_posts = Post.published.annotate(
+            similarity=TrigramSimilarity('title', post.title)
+        ).filter(
+            similarity__gt=0.1  # Threshold: 0.1 is lenient enough to match short words like "do"
+        ).exclude(id=post.id).order_by('-similarity')[:4 - tag_based_posts.count()]
+
+    # Combine both sets of posts and remove duplicates
+    similar_posts = (tag_based_posts | title_based_posts).distinct()
+
+    # Annotate with tag count and sort
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')
     ).order_by('-same_tags', '-publish')[:4]
@@ -139,7 +159,6 @@ def post_detail(request, year, month, day, post_slug):
             'similar_posts': similar_posts
         }
     )
-
 
 # View function for handling comment submission (POST only)
 @require_POST
@@ -169,7 +188,6 @@ def post_comment(request, post_id):
         }
     )
 
-
 # View function for searching posts by keyword
 def post_search(request):
     form = SearchForm()
@@ -180,12 +198,34 @@ def post_search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
+
+            # 1. Full-text search on title and body (with weights)
             search_vector = SearchVector('title', weight='A') + SearchVector('body', weight='B')
             search_query = SearchQuery(query)
 
-            results = Post.published.annotate(
-                similarity=TrigramSimilarity('title', query),
-            ).filter(similarity__gt=0.1).order_by('-similarity')
+            full_text_results = Post.published.annotate(
+                rank=SearchRank(search_vector, search_query)
+            ).filter(rank__gte=0.1).order_by('-rank', '-publish')
+
+            # 2. Trigram similarity search on title and body
+            trigram_results = Post.published.annotate(
+                title_similarity=TrigramSimilarity('title', query),
+                body_similarity=TrigramSimilarity('body', query),
+                total_similarity=(
+                    TrigramSimilarity('title', query) * 2 +
+                    TrigramSimilarity('body', query)
+                )
+            ).filter(
+                Q(title_similarity__gt=0.1) | Q(body_similarity__gt=0.1)
+            ).order_by('-total_similarity', '-publish')
+
+            # 3. Combine both result sets and remove duplicates
+            combined_results = (full_text_results | trigram_results).distinct()
+
+            # 4. Final ranking: prioritize full-text results, then trigram similarity
+            results = combined_results.annotate(
+                final_rank=SearchRank(search_vector, search_query) + (TrigramSimilarity('title', query) * 2)
+            ).order_by('-final_rank', '-publish')
 
     return render(
         request,

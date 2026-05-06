@@ -97,3 +97,59 @@ input[type=submit] {
     color:#666;
 }
 
+//* pagination */
+.pagination {
+    margin:40px 0;
+    font-weight:bold;
+}
+
+/* 固定在左下角的分页（替代原来的 .pagination 样式） */
+.fixed-pagination {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    font-size: 14px;
+    font-family: helvetica, sans-serif;
+}
+
+.fixed-pagination a {
+    color: #00abff;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+.fixed-pagination a:hover {
+    text-decoration: underline;
+}
+
+.fixed-pagination .current {
+    font-weight: bold;
+    color: #333;
+    padding: 0 5px;
+}
+
+/* 适配移动端 */
+@media (max-width: 768px) {
+    .fixed-pagination {
+        bottom: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+/* 禁用状态的链接 */
+.fixed-pagination .disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    padding: 0 5px;
+}
+
+.fixed-pagination .disabled:hover {
+    text-decoration: none;
+}

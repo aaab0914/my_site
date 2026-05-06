@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # third-party
     'taggit',
+    'markdownx',
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,44 @@ STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # 指向项目根目录的static文件夹
+]
+
+# settings.py
+# settings.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'access.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.access': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+# 静态文件配置
+STATIC_URL = 'static/'
+
+# 添加这一行（路径指向项目根目录下的 staticfiles 文件夹）
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
 ]

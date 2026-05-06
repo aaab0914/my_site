@@ -1,14 +1,22 @@
 {% extends "blog/base.html" %}
+<!-- 在模板顶部添加 -->
+<p>DEBUG: template loaded</p>
 {% load blog_tags %}
+{#{% load markdownx %}#}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
     <h1>{{ post.title }}</h1>
+
     <p class="date">
         Published {{ post.publish }} by {{ post.author }}
     </p>
-    {{ post.body|markdown }}
+
+    <!-- 文章正文：只渲染一次，使用 markdownx 过滤器，并加上 |safe -->
+    <div class="post-body">
+    {{ post.get_markdown_body|safe }}
+</div>
 
     {% with comments.count as total_comments %}
         <h2>

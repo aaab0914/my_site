@@ -16,6 +16,9 @@ from taggit.managers import TaggableManager
 from django.utils.text import slugify
 # slugify: Function to convert a string into a URL-friendly slug (e.g., "Hello World" → "hello-world")
 
+from markdownx.models import MarkdownxField
+
+import markdown
 
 # Custom manager class: Filters only published posts
 class PublishedManager(models.Manager):
@@ -45,7 +48,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='blog_posts'
     )
-    body = models.TextField()
+    body = MarkdownxField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -86,6 +89,9 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_markdown_body(self):
+        return markdown.markdown(self.body)
 
 
 # Comment model class: Defines comments associated with blog posts

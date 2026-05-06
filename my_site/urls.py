@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
+from markdownx import urls as markdownx_urls
 
 from blog.sitemaps import PostSitemap
 
@@ -37,5 +38,6 @@ urlpatterns = [
         sitemap,
         {'sitemaps': sitemaps},
         name='django/contrib.sitemaps.views.sitemaps'
-    )
+    ),
+    path('markdownx/', include(markdownx_urls)),
 ]

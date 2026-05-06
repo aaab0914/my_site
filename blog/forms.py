@@ -1,5 +1,8 @@
 from django import forms
+# forms: Django's form handling module for creating and validating forms
+
 from .models import Comment
+# Comment: The comment model (imported from the current app)
 
 class EmailPostForm(forms.Form):
     name = forms.CharField(max_length=25)
