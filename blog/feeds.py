@@ -1,3 +1,8 @@
+# feeds.py
+# ========================================
+# Imports
+# ========================================
+
 import markdown
 # markdown: Python library for converting Markdown text to HTML
 
@@ -17,23 +22,42 @@ from .models import Post
 from django.utils.html import strip_tags
 # strip_tags: Utility function to remove HTML tags from a string
 
-class LatestPostsFeed(Feed):
 
+# ========================================
+# RSS Feed Class
+# ========================================
+
+class LatestPostsFeed(Feed):
+    """
+    RSS feed for the latest blog posts.
+    """
     title = 'My Blog'
     link = reverse_lazy('blog:post_list')
     description = 'New Posts of My Blog.'
 
     def items(self):
+        """
+        Returns the latest 5 published posts.
+        """
         return Post.published.all()[:5]
 
     def item_title(self, item):
+        """
+        Returns the title of a post.
+        """
         return item.title
 
     def item_description(self, item):
-        # 先将 Markdown 转换为 HTML，然后移除所有 HTML 标签
+        """
+        Returns the description of a post (plain text, truncated to 30 words).
+        """
+        # Convert Markdown to HTML, then strip all HTML tags
         plain_text = strip_tags(item.get_markdown_body())
-        # 截断为 30 个单词，末尾添加省略号
+        # Truncate to 30 words and add ellipsis
         return truncatewords(plain_text, 30) + '...'
 
     def item_pubdate(self, item):
+        """
+        Returns the publication date of a post.
+        """
         return item.publish

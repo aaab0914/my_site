@@ -1,29 +1,65 @@
+# tests.py
+# ========================================
+# Imports
+# ========================================
+
 from django.test import TestCase, Client
+# TestCase: Base class for writing Django unit tests
+# Client: Simulated HTTP client for testing views
+
 from django.urls import reverse
+# reverse: Function for generating URLs by resolving view names
+
 from django.contrib.auth.models import User
+# User: The built-in user model
+
 from django.utils import timezone
+# timezone: Utility for handling timezone-aware datetime operations
+
 from django.contrib.admin.sites import AdminSite
+# AdminSite: The Django admin site class
+
 from django.contrib.messages import get_messages
+# get_messages: Function for retrieving messages from the request
 
 from .models import Post, Comment
+# Post: The main blog post model
+# Comment: The comment model
+
 from .forms import CommentForm, SearchForm
+# CommentForm: Form for adding a comment
+# SearchForm: Form for searching posts
+
 from .admin import PostAdmin
+# PostAdmin: Admin configuration for the Post model
+
 from .feeds import LatestPostsFeed
+# LatestPostsFeed: RSS feed class for the blog
 
 from taggit.models import Tag
+# Tag: Model class representing tags
 
 import os
+# os: Operating system interface for file and directory operations
+
 import subprocess
+# subprocess: Module for running external commands
+
 import unittest
+# unittest: Python's built-in unit testing framework
 
 
-# ===============================
-# 1. 标签测试
-# ===============================
+# ========================================
+# Test Cases
+# ========================================
+
 class TagTest(TestCase):
-    """测试文章标签的创建、添加、查询"""
+    """
+    Test case for tag creation, addition, and querying.
+    """
 
     def setUp(self):
+        """Set up test data."""
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
@@ -39,13 +75,13 @@ class TagTest(TestCase):
         )
 
     def test_add_tag_to_post(self):
-        """测试添加标签到文章"""
+        """Test adding tags to a post."""
         self.post.tags.add('django', 'python', 'testing')
         self.assertEqual(self.post.tags.count(), 3)
         self.assertTrue(self.post.tags.filter(name='django').exists())
 
     def test_query_posts_by_tag(self):
-        """测试通过标签查询文章"""
+        """Test querying posts by tag."""
         self.post.tags.add('django', 'python')
         tag = Tag.objects.get(name='django')
         posts = Post.published.filter(tags__in=[tag])
@@ -53,18 +89,18 @@ class TagTest(TestCase):
         self.assertEqual(posts.first().title, 'Test Post with Tags')
 
     def test_tag_slug_generation(self):
-        """测试标签 slug 自动生成"""
+        """Test automatic slug generation for tags."""
         tag = Tag.objects.create(name='Django REST Framework')
         self.assertEqual(tag.slug, 'django-rest-framework')
 
 
-# ===============================
-# 2. RSS Feed 测试
-# ===============================
 class RSSFeedTest(TestCase):
-    """测试 RSS 订阅功能"""
+    """
+    Test case for the RSS feed functionality.
+    """
 
     def setUp(self):
+        """Set up test data."""
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
@@ -81,35 +117,35 @@ class RSSFeedTest(TestCase):
             )
 
     def test_rss_feed_status_code(self):
-        """测试 RSS 订阅页面的状态码"""
+        """Test the status code of the RSS feed page."""
         response = self.client.get(reverse('blog:post_feed'))
         self.assertEqual(response.status_code, 200)
 
     def test_rss_feed_content_type(self):
-        """测试 RSS 订阅页面的 Content-Type"""
+        """Test the Content-Type of the RSS feed page."""
         response = self.client.get(reverse('blog:post_feed'))
         self.assertEqual(response['Content-Type'], 'application/rss+xml; charset=utf-8')
 
     def test_rss_feed_contains_posts(self):
-        """测试 RSS 订阅页面是否包含文章"""
+        """Test that the RSS feed contains posts."""
         response = self.client.get(reverse('blog:post_feed'))
         self.assertContains(response, 'RSS Test Post 0')
         self.assertContains(response, 'RSS Test Post 4')
 
     def test_rss_feed_item_count(self):
-        """测试 RSS 订阅页面包含的文章数量（应为 5 篇）"""
+        """Test the number of items in the RSS feed (should be 5)."""
         feed = LatestPostsFeed()
         items = feed.items()
         self.assertEqual(len(items), 5)
 
 
-# ===============================
-# 3. 搜索功能测试
-# ===============================
 class SearchTest(TestCase):
-    """测试搜索功能"""
+    """
+    Test case for the search functionality.
+    """
 
     def setUp(self):
+        """Set up test data."""
         self.user = User.objects.create_user(
             username='testuser',
             email='test@example.com',
@@ -141,38 +177,37 @@ class SearchTest(TestCase):
         )
 
     def test_search_by_body(self):
+        """Test searching by post body."""
         response = self.client.get(reverse('blog:post_search'), {'query': 'JavaScript'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'JavaScript Search Test')
-        # 移除 self.assertNotContains，因为搜索可能返回多个结果
 
     def test_search_by_title(self):
+        """Test searching by post title."""
         response = self.client.get(reverse('blog:post_search'), {'query': 'Django'})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Django Search Test')
-        # 移除 self.assertNotContains
 
     def test_search_empty_query(self):
+        """Test searching with an empty query."""
         response = self.client.get(reverse('blog:post_search'), {'query': ''})
         self.assertEqual(response.status_code, 200)
-        # 空查询应该显示搜索表单，不显示结果
 
     def test_search_no_results(self):
+        """Test searching for a non-existent term."""
         response = self.client.get(reverse('blog:post_search'), {'query': 'NonexistentTerm'})
         self.assertEqual(response.status_code, 200)
-        # 检查模板中是否显示 "Found 0 Results"
         self.assertContains(response, 'Found 0 Results')
-        # 或者检查结果列表为空
         self.assertEqual(len(response.context['results']), 0)
 
 
-# ===============================
-# 4. 管理员后台测试
-# ===============================
 class AdminTest(TestCase):
-    """测试 Admin 后台的访问和操作"""
+    """
+    Test case for the admin interface.
+    """
 
     def setUp(self):
+        """Set up test data."""
         self.superuser = User.objects.create_superuser(
             username='adminuser',
             email='admin@example.com',
@@ -194,35 +229,35 @@ class AdminTest(TestCase):
         )
 
     def test_admin_login_required(self):
-        """测试未登录访问 Admin 后台需要登录"""
+        """Test that unauthenticated users cannot access the admin."""
         response = self.client.get('/admin/')
         self.assertEqual(response.status_code, 302)
 
     def test_admin_login_success(self):
-        """测试管理员可以成功登录"""
+        """Test that an admin user can log in successfully."""
         self.client.login(username='adminuser', password='adminpass123')
         response = self.client.get('/admin/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Site administration')
 
     def test_admin_post_list_accessible(self):
-        """测试管理员可以访问文章列表"""
+        """Test that the admin can access the post list page."""
         self.client.login(username='adminuser', password='adminpass123')
         response = self.client.get('/admin/blog/post/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Admin Test Post')
 
     def test_admin_post_change_accessible(self):
-        """测试管理员可以访问文章编辑页面"""
+        """Test that the admin can access the post change page."""
         self.client.login(username='adminuser', password='adminpass123')
         response = self.client.get(f'/admin/blog/post/{self.post.id}/change/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h2>Admin Test Post</h2>', html=True)
 
     def test_admin_post_delete(self):
+        """Test that the admin can delete a post."""
         self.client.login(username='adminuser', password='adminpass123')
         post_id = self.post.id
-        # 模拟 Admin 删除操作
         response = self.client.post(f'/admin/blog/post/{post_id}/delete/', {
             'post': post_id,
             'action': 'delete_selected',
@@ -230,20 +265,19 @@ class AdminTest(TestCase):
             '_selected_action': [post_id],
             '_save': 'Save'
         }, follow=True)
-        # 验证文章已被删除
         with self.assertRaises(Post.DoesNotExist):
             Post.objects.get(id=post_id)
 
 
-# ===============================
-# 5. Docker 配置测试
-# ===============================
 class DockerTest(TestCase):
-    """测试容器化环境是否正常（需要在宿主机运行）"""
+    """
+    Test case for Docker environment configuration.
+    Note: These tests must be run on the host machine, not inside the container.
+    """
 
-    @unittest.skip("Docker 测试需要在宿主机环境中运行")
+    @unittest.skip("Docker tests must be run on the host machine")
     def test_db_container_running(self):
-        """测试 PostgreSQL 数据库容器是否运行"""
+        """Test that the PostgreSQL database container is running."""
         result = subprocess.run(
             ['docker', 'ps', '--filter', 'name=my_site_db', '--format', '{{.Names}}'],
             capture_output=True,
@@ -252,9 +286,9 @@ class DockerTest(TestCase):
         )
         self.assertIn('my_site_db', result.stdout.strip())
 
-    @unittest.skip("Docker 测试需要在宿主机环境中运行")
+    @unittest.skip("Docker tests must be run on the host machine")
     def test_web_container_running(self):
-        """测试 Web 容器是否运行"""
+        """Test that the web container is running."""
         result = subprocess.run(
             ['docker', 'ps', '--filter', 'name=my_site_web', '--format', '{{.Names}}'],
             capture_output=True,
@@ -263,9 +297,9 @@ class DockerTest(TestCase):
         )
         self.assertIn('my_site_web', result.stdout.strip())
 
-    @unittest.skip("Docker 测试需要在宿主机环境中运行")
+    @unittest.skip("Docker tests must be run on the host machine")
     def test_container_health_check(self):
-        """测试容器健康状态"""
+        """Test the health status of the container."""
         result = subprocess.run(
             ['docker', 'inspect', 'my_site_web', '--format', '{{.State.Health.Status}}'],
             capture_output=True,
@@ -275,9 +309,9 @@ class DockerTest(TestCase):
         health_status = result.stdout.strip()
         self.assertIn(health_status, ['healthy', 'starting'])
 
-    @unittest.skip("Docker 测试需要在宿主机环境中运行")
+    @unittest.skip("Docker tests must be run on the host machine")
     def test_docker_compose_project(self):
-        """测试 Docker Compose 项目是否正确运行"""
+        """Test that the Docker Compose project is running correctly."""
         result = subprocess.run(
             ['docker', 'compose', 'ps', '--format', 'json'],
             capture_output=True,

@@ -1,43 +1,68 @@
-"""
-URL configuration for my_site project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# my_site/urls.py
+# ========================================
+# Imports
+# ========================================
 
 from django.contrib import admin
+# admin: Django's built-in administration module
+
 from django.urls import path, include
+# path: Function for defining URL patterns
+# include: Function for including other URL configurations
+
 from django.contrib.sitemaps.views import sitemap
+# sitemap: View function for generating sitemap XML
+
 from markdownx import urls as markdownx_urls
+# markdownx_urls: URL patterns for markdownx
 
 from blog.sitemaps import PostSitemap
+# PostSitemap: Sitemap class for Post model
+
+
+# ========================================
+# Sitemap Configuration
+# ========================================
 
 sitemaps = {
     'posts': PostSitemap,
 }
 
+
+# ========================================
+# URL Patterns
+# ========================================
+
 urlpatterns = [
-    path("admin/",
-         admin.site.urls),
-    path('blog/',
-         include(
-             'blog.urls',
-             namespace='blog')),
+    # Admin interface
     path(
-        'sitemap.xml',
-        sitemap,
+        "admin/",
+        admin.site.urls
+    ),
+
+    # Blog application URLs
+    path(
+        'blog/',
+        include('blog.urls', namespace='blog')
+    ),
+
+    # Sitemap
+    path(
+        'sitemap.xml'
+        ,sitemap,
         {'sitemaps': sitemaps},
         name='django/contrib.sitemaps.views.sitemaps'
     ),
-    path('markdownx/', include(markdownx_urls)),
+
+    # Markdownx URLs (for live preview)
+    path(
+        'markdownx/',
+        include(markdownx_urls)
+    ),
+    # path(
+    #     'accounts/',
+    #     include('django.contrib.auth.urls')),
+#     path(
+#
+#     )
 ]

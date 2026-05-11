@@ -1,9 +1,30 @@
+# urls.py
+# ========================================
+# Imports
+# ========================================
 
-from django.urls import path
+from django.urls import path, include
+# path: Function for defining URL patterns in Django
+
 from . import views
+# views: The views module containing all view functions for the blog app
+
 from .feeds import LatestPostsFeed
+# LatestPostsFeed: The RSS feed class for the blog
+from .views import PostDeleteView
+
+
+# ========================================
+# App Namespace
+# ========================================
 
 app_name = 'blog'
+# app_name: Namespace for the blog app's URLs
+
+
+# ========================================
+# URL Patterns
+# ========================================
 
 urlpatterns = [
     # URL pattern for displaying a single post detail page
@@ -58,5 +79,38 @@ urlpatterns = [
         'search/',
         views.post_search,
         name='post_search'
-    )
+    ),
+
+    # URL pattern for creating a new post
+    # Example: /create/
+    path(
+        'create/',
+        views.post_create,
+        name='post_create'
+    ),
+    # 正确写法
+    path(
+        '<int:pk>/delete/',
+        PostDeleteView.as_view(),
+        name='post_delete'
+    ),
+    path(
+        'post_delete_success/',
+        views.post_delete_success,
+        name='post_delete_success'
+    ),
+    # path(
+    #     'accounts/',
+    #     include('django.contrib.auth.urls')
+    # ),
+    # path(
+    #     'comment_delete/',
+    #     CommentDeleteView.as_view(),
+    #     name='comment_delete'
+    # ),
+    # path(
+    #     'add_comment/',
+    #     views.add_comment,
+    #     name='add_comment'
+    # ),
 ]

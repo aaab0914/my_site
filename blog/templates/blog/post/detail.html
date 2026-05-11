@@ -9,9 +9,13 @@
 {% block content %}
     <h1>{{ post.title }}</h1>
 
+
     <p class="date">
         Published {{ post.publish }} by {{ post.author }}
     </p>
+    <o>
+    <a href="{% url 'blog:post_delete' post.pk %}">Delete Post</a>
+    </o>
 
     <!-- 文章正文：只渲染一次，使用 markdownx 过滤器，并加上 |safe -->
     <div class="post-body">

@@ -1,4 +1,0 @@
-修改了views的post搜索 post细节
-加入了settings logging
-加入了admin页面的md css格式
-加入了测试功能

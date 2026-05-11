@@ -39,3 +39,7 @@ members.csv
 
 mysite_data.jsonmysite_data.json
 users.txt
+
+# 忽略日志文件
+access.log
+*.log

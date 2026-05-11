@@ -1,0 +1,476 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/app/my_site/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/app/my_site/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/app/my_site/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /blog/post_delete_success/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/blog/views.py", line 487, in post_delete_success
+    return render(request, 'blog/post/post_delete_successful.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_detail' with no arguments not found. 1 pattern(s) tried: ['blog/(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/(?P<post_slug>[-a-zA-Z0-9_]+)/\\Z']
+"GET /blog/post_delete_success/ HTTP/1.1" 500 148996
+Internal Server Error: /blog/post_delete_success/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/blog/views.py", line 487, in post_delete_success
+    return render(request, 'blog/post/post_delete_successful.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/template/defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'detail' not found. 'detail' is not a valid view function or pattern name.
+"GET /blog/post_delete_success/ HTTP/1.1" 500 145531
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10227
+"GET /blog/ HTTP/1.1" 200 15299
+"GET /blog/2026/5/4/test-markdown/ HTTP/1.1" 200 11361
+"GET /blog/?page=2 HTTP/1.1" 200 12395
+"GET /blog/?page=1 HTTP/1.1" 200 15299
+"GET /blog/2026/5/3/deploying-django-on-aws/ HTTP/1.1" 200 11669
+"GET /blog/9/delete/ HTTP/1.1" 200 10500
+Internal Server Error: /blog/9/delete/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/blog/views.py", line 499, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 74, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 145, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 258, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 263, in form_valid
+    success_url = self.get_success_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 235, in get_success_url
+    if self.success_url:
+       ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/functional.py", line 187, in __wrapper__
+    result = func(*self._args, **self._kw)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_delete_successful.html' not found. 'post_delete_successful.html' is not a valid view function or pattern name.
+"POST /blog/9/delete/ HTTP/1.1" 500 104400
+"GET /blog/9/delete/ HTTP/1.1" 200 10500
+Internal Server Error: /blog/9/delete/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/blog/views.py", line 499, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 74, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 145, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 258, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 263, in form_valid
+    success_url = self.get_success_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 235, in get_success_url
+    if self.success_url:
+       ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/functional.py", line 187, in __wrapper__
+    result = func(*self._args, **self._kw)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_delete_successful.html' not found. 'post_delete_successful.html' is not a valid view function or pattern name.
+"POST /blog/9/delete/ HTTP/1.1" 500 104400
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /blog/9/delete/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/blog/views.py", line 499, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 74, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/base.py", line 145, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 258, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 263, in form_valid
+    success_url = self.get_success_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/views/generic/edit.py", line 235, in get_success_url
+    if self.success_url:
+       ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/utils/functional.py", line 187, in __wrapper__
+    result = func(*self._args, **self._kw)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'post_delete_successful' not found. 'post_delete_successful' is not a valid view function or pattern name.
+"POST /blog/9/delete/ HTTP/1.1" 500 104320
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /blog/9/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10227
+"GET /blog/ HTTP/1.1" 200 15333
+Not Found: /blog/9/delete/
+"GET /blog/9/delete/ HTTP/1.1" 404 4626
+"GET /blog/ HTTP/1.1" 200 15333
+"GET /admin/blog/post/ HTTP/1.1" 200 28269
+"GET /static/admin/js/core.js HTTP/1.1" 200 6208
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+"GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+"GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+"GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+"GET /static/admin/img/search.svg HTTP/1.1" 200 607
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+"GET /static/admin/js/filters.js HTTP/1.1" 200 978
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 593
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 593
+"GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1761
+"GET /admin/blog/post/ HTTP/1.1" 200 28269
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+"GET /static/admin/css/changelists.css HTTP/1.1" 200 7498
+"GET /static/admin/css/base.css HTTP/1.1" 200 23100
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 200 3538
+"GET /static/admin/css/responsive.css HTTP/1.1" 200 16273
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+Not Found: /blog/9/delete/
+"GET /blog/9/delete/ HTTP/1.1" 404 4626
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 29679
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/blog/post/19/change/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 18020
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/js/theme.js HTTP/1.1" 304 0
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+"GET /static/admin/css/forms.css HTTP/1.1" 200 8817
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/js/calendar.js HTTP/1.1" 200 9159
+"GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19698
+"GET /static/markdownx/js/markdownx.js HTTP/1.1" 200 32567
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/css/widgets.css HTTP/1.1" 200 11811
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+"GET /static/admin/img/search.svg HTTP/1.1" 304 0
+"GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 200 569
+"POST /markdownx/markdownify/ HTTP/1.1" 200 8
+"GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1112
+"GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 805
+"GET /admin/blog/post/19/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 11214
+"GET /static/admin/js/cancel.js HTTP/1.1" 200 884
+"POST /admin/blog/post/19/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 302 0
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 29386
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/js/filters.js HTTP/1.1" 304 0
+"GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 558
+"GET /admin/blog/post/21/change/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 18020
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /markdownx/markdownify/ HTTP/1.1" 200 8
+"GET /admin/blog/post/21/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 11214
+"POST /admin/blog/post/21/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 302 0
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 28943
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/blog/post/22/change/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 18020
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /markdownx/markdownify/ HTTP/1.1" 200 8
+"GET /admin/blog/post/22/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 200 11214
+"POST /admin/blog/post/22/delete/?_changelist_filters=o%3D1.5.4 HTTP/1.1" 302 0
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 28502
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 12528
+"POST /admin/blog/post/?o=1.5.4 HTTP/1.1" 302 0
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 24771
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/auth/user/ HTTP/1.1" 200 18128
+"GET /static/admin/img/icon-no.svg HTTP/1.1" 200 645
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 928
+"GET /admin/auth/user/2/change/ HTTP/1.1" 200 35378
+"GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+"GET /static/admin/js/inlines.js HTTP/1.1" 200 15628
+"GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 16428
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+"GET /static/admin/img/inline-delete.svg HTTP/1.1" 200 651
+"GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 2387
+"GET /admin/auth/user/ HTTP/1.1" 200 18128
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 24636
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /blog/2026/5/3/optimizing-django-queries/ HTTP/1.1" 200 11719
+"GET /blog/10/delete/ HTTP/1.1" 200 10502
+"POST /blog/10/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10243
+"GET /blog/ HTTP/1.1" 200 15322
+"GET /blog/ HTTP/1.1" 200 15322
+"GET /blog/ HTTP/1.1" 200 15322
+"GET /admin/blog/post/?o=1.5.4 HTTP/1.1" 200 24117
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+"GET /static/admin/js/theme.js HTTP/1.1" 304 0
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/img/search.svg HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /static/admin/js/filters.js HTTP/1.1" 304 0
+Not Found: /blog/2026/5/3/optimizing-django-queries/
+"GET /blog/2026/5/3/optimizing-django-queries/ HTTP/1.1" 404 2798
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2863
+Not Found: /blog/2026/5/3/optimizing-django-queries/
+"GET /blog/2026/5/3/optimizing-django-queries/ HTTP/1.1" 404 2798
+"GET /admin/auth/user/ HTTP/1.1" 200 18128
+"GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-no.svg HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /blog/2026/5/3/optimizing-django-queries/
+"GET /blog/2026/5/3/optimizing-django-queries/ HTTP/1.1" 404 2798
+Not Found: /blog/2026/5/3/optimizing-django-queries/
+"GET /blog/2026/5/3/optimizing-django-queries/ HTTP/1.1" 404 2798
+"GET /blog/?page=1 HTTP/1.1" 200 15322
+"GET /blog/?page=1 HTTP/1.1" 200 15322
+"GET /blog/2026/5/3/user-authentication-in-django/ HTTP/1.1" 200 11716
+"GET /blog/8/delete/ HTTP/1.1" 200 10522
+"POST /blog/8/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10207
+"GET /admin/blog/post/ HTTP/1.1" 200 22592
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+Not Found: /blog/8/delete/
+"POST /blog/8/delete/ HTTP/1.1" 404 4627
+Not Found: /blog/8/delete/
+"GET /blog/8/delete/ HTTP/1.1" 404 4626
+"GET /blog/ HTTP/1.1" 200 15282
+"GET /blog/2026/5/3/django-testing-guide/ HTTP/1.1" 200 11683
+"GET /blog/7/delete/ HTTP/1.1" 200 10477
+"POST /blog/7/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10251
+"GET /blog/ HTTP/1.1" 200 15583
+"GET /blog/2026/5/3/django-security-best-practices/ HTTP/1.1" 200 11766
+"GET /blog/5/delete/ HTTP/1.1" 200 10531
+"POST /blog/5/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10248
+"GET /blog/ HTTP/1.1" 200 15132
+"GET /blog/2026/5/3/asynchronous-tasks-with-celery/ HTTP/1.1" 200 11388
+"GET /blog/4/delete/ HTTP/1.1" 200 10528
+"POST /blog/4/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10248
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /blog/ HTTP/1.1" 200 14691
+"GET /blog/2026/5/3/building-e-commerce-with-django/ HTTP/1.1" 200 11616
+"GET /blog/6/delete/ HTTP/1.1" 200 10529
+"POST /blog/6/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10208
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /blog/ HTTP/1.1" 200 14222
+"GET /blog/2026/5/3/grand-theft-auto-v-complete-review/ HTTP/1.1" 200 11799
+"GET /blog/12/delete/ HTTP/1.1" 200 10502
+"POST /blog/12/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10188
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /blog/ HTTP/1.1" 200 13621
+"GET /static/css/blog.css HTTP/1.1" 304 0
+"GET /blog/ HTTP/1.1" 200 13621
+"GET /blog/2026/5/3/mastering-django-orm/ HTTP/1.1" 200 11585
+"GET /blog/1/delete/ HTTP/1.1" 200 10466
+"POST /blog/1/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 10188
+Watching for file changes with StatReloader
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+/app/blog/views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /blog/ HTTP/1.1" 200 12963
+"GET /blog/2026/5/3/django-rest-framework-tutorial/ HTTP/1.1" 200 11303
+"GET /blog/2026/5/3/red-dead-redemption-2-masterpiece-analysis/ HTTP/1.1" 200 11785
+"GET /blog/2026/5/3/django-rest-framework-tutorial/ HTTP/1.1" 200 11303
+"GET /blog/2/delete/ HTTP/1.1" 200 10476
+"POST /blog/2/delete/ HTTP/1.1" 302 0
+"GET /blog/post_delete_success/ HTTP/1.1" 200 9916
