@@ -1,6 +1,7 @@
 .venv/
 venv/
 .pwsh/
+.bash/
 
 # 数据库文件
 *.sqlite3
